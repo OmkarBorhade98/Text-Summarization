@@ -22,8 +22,8 @@ files= [
     'app.py',
     'main.py',
     'setup.py',
-    'environment.yml'
-    'setup.py'
+    'environment.yml',
+    'setup.py',
     'research/trials.ipynb'
 ]
 
