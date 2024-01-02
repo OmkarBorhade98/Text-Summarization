@@ -15,7 +15,6 @@ setuptools.setup(
     author=auth_name,
     description="Text Summarization package using NLP",
     long_description=long_description,
-    long_description_content="text/markdown",
     url=f"https://github.com/{auth_name}/{repo_name}",
     project_urls={
         "Bug Tracker": f"https://github.com/{auth_name}/{repo_name}/issues",

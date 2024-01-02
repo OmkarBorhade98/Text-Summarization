@@ -32,3 +32,30 @@ def read_yaml(path_to_yaml: str) ->ConfigBox :
     except Exception as e:
         raise e
     
+@ensure_annotations
+def create_directories(directory_paths: list, verbose:bool = True ):
+    """
+    Create directories at paths mentioned in the list
+
+    Args:
+        directory_paths: List of path directories
+        verbose: logs the creted files is set True
+    """
+    for path in directory_paths:
+        os.makedirs(path, exist_ok= True)
+        if verbose:
+            logger.info(f'Created Director at: {path}')
+
+@ensure_annotations
+def get_size(file_path: str) -> str:
+    """
+    Returns size of file
+
+    Args:
+        file_path: path to a file
+
+    Returns:
+        Size of file in KB string 
+    """
+    size_in_KB = round(os.path.getsize(file_path)/ 1024)
+    return f'~ {size_in_KB} KB'
