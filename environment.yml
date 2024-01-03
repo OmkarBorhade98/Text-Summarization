@@ -16,6 +16,8 @@ dependencies:
   - notebook
   - boto3
   - Jinja2==3.1.2
+  - jupyter
+  - ipykernel
   - pip
   - pip:
     - rouge_score 
