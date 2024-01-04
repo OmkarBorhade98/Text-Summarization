@@ -8,7 +8,7 @@ from typing import Any
 from ensure import ensure_annotations
 
 @ensure_annotations
-def read_yaml(path_to_yaml: str) ->ConfigBox :
+def read_yaml(path_to_yaml: Path | str) ->ConfigBox :
     """
     reads yaml file and returns it in ConfigBox format
 
@@ -47,7 +47,7 @@ def create_directories(directory_paths: list, verbose:bool = True ):
             logger.info(f'Created Director at: {path}')
 
 @ensure_annotations
-def get_size(file_path: str) -> str:
+def get_size(file_path: Path | str) -> str:
     """
     Returns size of file
 
