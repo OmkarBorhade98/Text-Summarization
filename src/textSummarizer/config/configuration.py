@@ -1,6 +1,7 @@
 from textSummarizer.constants import *
 from textSummarizer.utils.common import read_yaml, create_directories
-from textSummarizer.entity import DataInjestionConfig
+from textSummarizer.entity import DataInjestionConfig, DataValidationConfig
+import os
 
 class ConfigManager:
     """
@@ -29,3 +30,16 @@ class ConfigManager:
         )
 
         return data_injestion_config
+    
+    def get_data_validation_config(self)-> DataValidationConfig:
+        """
+        Return Data validation configuration
+        """
+        data_validation_config = DataValidationConfig(
+            self.config.data_validation.root_dir,
+            self.config.data_validation.status_file,
+            self.config.data_validation.all_required_files,
+            os.path.join(self.config.data_ingestion.root_dir, 
+                         self.config.dataset_name+'_dataset')
+        )
+        return data_validation_config
