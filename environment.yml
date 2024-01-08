@@ -3,6 +3,7 @@ channels:
   - defaults
 dependencies:
   - python
+  - sentencepiece
   - transformers
   - transformers[sentencepiece]
   - datasets
