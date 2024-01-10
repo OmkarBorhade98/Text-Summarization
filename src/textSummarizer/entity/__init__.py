@@ -32,3 +32,17 @@ class DataValidationConfig:
     status_file: str
     all_required_files: list
     dataset_dir: str
+
+
+@dataclass(frozen = True)
+class DataTransformationConfig:
+    """
+    A Data Transformation Data Class
+    Data:
+        root_dir: Root Directory
+        dataset_path: Local Dataset Path
+        tokenizer_name: Tokenizer to be used
+    """
+    root_dir: Path
+    dataset_path: Path
+    tokenizer_name: Path
