@@ -18,7 +18,10 @@ class ModelTrainer:
         model = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to(device)
         seq2seq_data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
         # load data 
-        dataset_samsum_pt = load_from_disk(self.config.data_path)
+        splits = ['train', ' test', 'validation']
+        dataset_samsum_pt ={}
+        for split in splits:
+            dataset_samsum_pt[split] = load_from_disk(os.path.join(self.config.data_path, split))
         trainer_args = TrainingArguments(
             output_dir = self.config.root_dir,
             num_train_epochs = self.config.num_train_epochs, 
