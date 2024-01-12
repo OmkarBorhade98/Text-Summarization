@@ -18,7 +18,7 @@ class ModelTrainer:
         model = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to(device)
         seq2seq_data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
         # load data 
-        splits = ['train', ' test', 'validation']
+        splits = ['train', 'test', 'validation']
         dataset_samsum_pt ={}
         for split in splits:
             dataset_samsum_pt[split] = load_from_disk(os.path.join(self.config.data_path, split))
