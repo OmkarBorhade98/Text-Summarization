@@ -14,7 +14,8 @@ class ModelTrainer:
     def train(self):
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
         logger.info(f'device : {device}')
-        tokenizer = self.config.tokenizer_name
+        tokenizer_name = self.config.tokenizer_name
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
         model = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to(device)
         seq2seq_data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
         # load data 
@@ -32,7 +33,7 @@ class ModelTrainer:
             logging_steps = self.config.logging_steps,
             evaluation_strategy = self.config.evaluation_strategy, 
             eval_steps = self.config.eval_steps, 
-            save_steps = self.config.save_steps,
+            save_steps = float(self.config.save_steps),
             gradient_accumulation_steps = self.config.gradient_accumulation_steps
         )
         logger.info('Training Started')
