@@ -19,4 +19,8 @@ data_transformation:
 
 model_trainer:
   root_dir: artifacts/model_trainer
-  model_ckpt: google/pegasus-cnn_dailymail
+  model_ckpt: artifacts/model_trainer/model #google/pegasus-cnn_dailymail
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  metric_file_name: artifacts/model_evaluation/metric.csv
