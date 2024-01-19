@@ -62,3 +62,11 @@ class ModelTrainerConfig:
     eval_steps: int
     save_steps: float
     gradient_accumulation_steps: int
+
+@dataclass(frozen= True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    dataset_path: Path
+    model_ckpt: Path
+    tokenizer_path: Path
+    metric_file_name: Path
