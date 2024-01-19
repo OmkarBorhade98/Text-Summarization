@@ -44,7 +44,7 @@ class ModelEvaluation:
 
         rouge_name = ['rouge1', 'rouge2', 'rougeL', 'rougeLsum']
         rouge_metric = load_metric('rouge')
-        score  = self.calculate_metric_on_test_dataset(datset, tokenizer, model, rouge_metric, 16, device, 'dialogue', 'summary')
+        score  = self.calculate_metric_on_test_dataset(datset, tokenizer, model, rouge_metric, 8, device, 'dialogue', 'summary')
 
         rouge_dict = dict((rn, score[rn].mid.fmeasure) for rn in rouge_name)
         print(rouge_dict)
