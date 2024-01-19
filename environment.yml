@@ -29,4 +29,5 @@ dependencies:
     - ensure==1.0.2
     - uvicorn==0.18.3
     - protobuf
+    - transformers[torch]
     - -e . 
