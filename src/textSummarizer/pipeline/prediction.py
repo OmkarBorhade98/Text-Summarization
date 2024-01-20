@@ -4,15 +4,15 @@ from transformers import pipeline, AutoTokenizer
 class PredictionPipeline:
     def __init__(self):
         self.config = ConfigManager().get_model_evaluation_config()
+        tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer_path)
+        self.gen_kwargs = {"length_penalty": 0.8, "num_beams":8, "max_length": 128}
+        self.pipeline = pipeline('summarization', model = self.config.model_ckpt, tokenizer=tokenizer)
 
     def predict(self, text):
-        tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer_path)
-        gen_kwargs = {"length_penalty": 0.8, "num_beams":8, "max_length": 128}
-        apipeline = pipeline('summarization', model = self.config.model_ckpt, tokenizer=tokenizer)
         print("Dialogue:")
         print(text)
 
-        output = apipeline(text, **gen_kwargs)[0]["summary_text"]
+        output = self.pipeline(text, **self.gen_kwargs)[0]["summary_text"]
         print("\nModel Summary:")
         print(output)
 
