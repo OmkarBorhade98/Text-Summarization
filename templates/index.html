@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-bottom: 10px;
+            margin-top: 30px;
+            margin-right: 10px;
+            margin-left: 10px;
+            
+        }
+
+        .input-container {
+            display: flex;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        
+        textarea {
+            flex: 1;
+            padding: 20px;
+            width: 300px;
+            height: 200px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+            vertical-align: top;
+            resize: none;
+            scroll-behavior: smooth;
+        }
+
+        textarea[name= "output_text"] {
+            flex: 1;
+            padding: 20px;
+            box-sizing: content-box;
+            width: 400px;
+            height: 500px;
+            margin-bottom: 30px;
+            vertical-align: top;
+            resize: none;
+            scroll-behavior: smooth;    
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <form id="predictionForm">
+        <h1 style="text-align: center; font-weight: bold;">Text Summarizer</h1>
+        <label for="inputText">Enter Text:</label>
+        <div class="input-container">
+            <!-- Change input type from "text" to "textarea" -->
+            <textarea id="inputText" name="input_text" required></textarea>
+        </div>
+
+        <button type="button" onclick="predict()">Summarize</button>
+
+        <label for="outputText">Summarization Result:</label>
+        <textarea id="outputText" name="output_text" readonly></textarea>
+    </form>
+
+    <script>
+        function predict() {
+            var inputText = document.getElementById("inputText").value;
+
+            // Make an AJAX request to the Flask server
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/predict", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("outputText").value = response.result;
+                }
+            };
+            xhr.send("input_text=" + inputText);
+        }
+    </script>
+</body>
+</html>
